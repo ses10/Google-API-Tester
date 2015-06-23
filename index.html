@@ -21,6 +21,26 @@
 </div>
 
 <script>
+    function setP(oauthParams){
+        this.oauthParams = oauthParams;
+        signIn();
+    }
+
+    function signIn(){
+        if(oauthParams != "")
+        {
+           document.write("Signed In!");
+
+            $.ajax({
+                url: "https://www.googleapis.com/plus/v1/people/me",
+                dataType: 'jsonp',
+                data: {access_token: oauthParams['access_token']}
+            });
+        }
+        else
+            document.write("Error Signing In!");
+    }
+
     $(document).ready(function(){
 
         var clientId = '1005893876351-vtdmpqp4c8d2ffneaisg8vpl4u377tt3.apps.googleusercontent.com';
@@ -29,7 +49,7 @@
         $('#signInButton').on('click', function(){
 
             var authorizationUrlBase = 'https://accounts.google.com/o/oauth2/auth';
-            var redirectUri = 'http://localhost/GoogleUse/oauthcallback.html';
+            var redirectUri = 'http://rawgit.com/ses10/Google-API-Tester/master/callback.html';
             var scope = 'https://www.googleapis.com/auth/plus.login';
             var scope2 = 'https://www.googleapis.com/auth/blogger';
             var state;
