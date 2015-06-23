@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div id="signIn" class="row">
+        <div  class="col-md-12">
+            <h2>Please Sign in with Google to use App</h2>
+            <input id="signInButton" type="submit" value="Sign In">
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+
+        var clientId = '1005893876351-vtdmpqp4c8d2ffneaisg8vpl4u377tt3.apps.googleusercontent.com';
+
+        //assign signInButton
+        $('#signInButton').on('click', function(){
+
+            var authorizationUrlBase = 'https://accounts.google.com/o/oauth2/auth';
+            var redirectUri = 'http://localhost/GoogleUse/oauthcallback.html';
+            var scope = 'https://www.googleapis.com/auth/plus.login';
+            var scope2 = 'https://www.googleapis.com/auth/blogger';
+            var state;
+
+
+            var rand = Math.random();
+            var dateTime = new Date().getTime();
+            state = rand * dateTime;
+
+            var url = authorizationUrlBase;
+            url += '?response_type=token'
+                    + '&redirect_uri=' + encodeURIComponent(redirectUri)
+                    + '&client_id=' + encodeURIComponent(clientId)
+                    + '&scope=' + encodeURIComponent(scope)
+                    + '+' + encodeURIComponent(scope2)
+                    + '&state=' + encodeURIComponent(state);
+
+            //open window to google auth
+            var w = window.open(url, '_blank', 'width=500,height=400');
+        });
+    });
+</script>
+</body>
+</html>
