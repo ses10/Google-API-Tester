@@ -16,7 +16,23 @@
 </div>
 
 <script>
+    $(document).ready(function(){
+        var oauthParams = {}
 
+        var params = {}, queryString = location.hash.substring(1),
+                regex = /([^&=]+)=([^&]*)/g
+
+        while (m = regex.exec(queryString)) {
+            oauthParams[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+        }
+
+        document.write(oauthParams['access_token']);
+
+        //return to original window
+        window.opener.setP(oauthParams);
+
+        window.close();
+    });
 </script>
 </body>
 </html>
