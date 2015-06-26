@@ -52,20 +52,13 @@
             var redirectUri = 'http://rawgit.com/ses10/Google-API-Tester/master/callback.html';
             var scope = 'https://www.googleapis.com/auth/plus.login';
             var scope2 = 'https://www.googleapis.com/auth/blogger';
-            var state;
-
-
-            var rand = Math.random();
-            var dateTime = new Date().getTime();
-            state = rand * dateTime;
 
             var url = authorizationUrlBase;
             url += '?response_type=token'
                     + '&redirect_uri=' + encodeURIComponent(redirectUri)
                     + '&client_id=' + encodeURIComponent(clientId)
                     + '&scope=' + encodeURIComponent(scope)
-                    + '+' + encodeURIComponent(scope2)
-                    + '&state=' + encodeURIComponent(state);
+                    + '+' + encodeURIComponent(scope2);
 
             //open window to google auth
             var w = window.open(url, '_blank', 'width=500,height=400');
